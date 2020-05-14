@@ -8,11 +8,9 @@ public class EmployeeWage {
 
 	public static void main(String[] args) {
 		//Variables
-		int totalEmpHrs = 0, totalEmpWage = 0, totalWorkingDays = 0;
+		int empHrs = 0, empWage = 0, totalEmpWage = 0;
 		//Computation
-		while ( totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS ){
-			totalWorkingDays++;
-			int empHrs = 0, empWage = 0;
+		for ( int day = 0; day < NUM_OF_WORKING_DAYS; day++ ){
 			int empCheck =(int) Math.floor(Math.random() * 10) % 3;
 			switch (empCheck){
 				case IS_FULL_TIME:
@@ -24,7 +22,6 @@ public class EmployeeWage {
 				default:
 					empHrs = 0;
 			}
-			totalEmpHrs += empHrs;
       	empWage = empHrs * EMP_RATE_PER_HOUR;
       	totalEmpWage += empWage;
       	System.out.println("Employee Wage : " +empWage);
