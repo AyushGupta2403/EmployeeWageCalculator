@@ -11,6 +11,7 @@ public class EmployeeWage {
 		//Variables
 		int totalEmpHrs = 0, totalEmpWage = 0, totalWorkingDays = 0;
 		//Computation
+<<<<<<< HEAD
 		while ( totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS ){
 			totalWorkingDays++;
 			int empHrs = 0;
@@ -31,5 +32,14 @@ public class EmployeeWage {
       	System.out.println("Employee Wage : " +empWage);
 		}
 		System.out.println("Total Employee Wage: " + totalEmpWage);
+=======
+		double empCheck = Math.floor(Math.random() * 10) % 2;
+		if (empCheck == IS_FULL_TIME)
+			empHrs = 8;
+		else
+			empHrs = 0;
+		empWage = empHrs * EMP_RATE_PER_HOUR;
+		System.out.println("Employee Wage : " +empWage);
+>>>>>>> UC2_Calculate_Wage
 	}
 }
