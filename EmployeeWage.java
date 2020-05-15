@@ -3,27 +3,18 @@ public class EmployeeWage {
 	//Constants
 	public static final int IS_PART_TIME = 1;
 	public static final int IS_FULL_TIME = 2;
+	public static final int EMP_RATE_PER_HOUR = 20;
+	public static final int NUM_OF_WORKING_DAYS = 20;
+	public static final int MAX_HRS_IN_MONTH = 100;
 
-	private final String company;
-	private final int empRatePerHour;
-	private final int numOfWorkingDays;
-	private final int maxHoursPerMonth;
-
-	public EmployeeWage(String company, int empRatePerHour,
-												int numOfWorkingDays, int maxHoursPerMonth) {
-		this.company = company;
-		this.empRatePerHour = empRatePerHour;
-		this.numOfWorkingDays = numOfWorkingDays;
-		this.maxHoursPerMonth = maxHoursPerMonth;
-	}
-	public static void main(String[] args){
-		EmployeeWage dMart = new EmployeeWage("DMart", 20, 2, 10);
+	public static int computeEmpWage() {
 		//Variables
 		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
 		//Computation
-		while ( totalEmpHrs <= dMart.maxHoursPerMonth && totalWorkingDays < dMart.numOfWorkingDays ){
+		while ( totalEmpHrs <= MAX_HRS_IN_MONTH &&
+				 totalWorkingDays < NUM_OF_WORKING_DAYS ) {
 			totalWorkingDays++;
-			int empCheck =(int) Math.floor(Math.random() * 10) % 3;
+			int empCheck = (int) Math.floor(Math.random() * 10) % 3;
 			switch (empCheck){
 				case IS_FULL_TIME:
 					empHrs = 8;
@@ -35,10 +26,13 @@ public class EmployeeWage {
 					empHrs = 0;
 			}
 			totalEmpHrs += empHrs;
-      	System.out.println("Day : " + totalWorkingDays + " Emp Hrs" +empHrs);
+			System.out.println("Day : " + totalWorkingDays + " Employee Hours : " +empHrs);
 		}
-		int totalEmpWage = totalEmpHrs * dMart.empRatePerHour;
-		System.out.println("Total Employee Wage for Company: "+dMart.company+" is : " +
-									totalEmpWage);
+		int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
+		System.out.println("Total Employee Wage: " + totalEmpWage);
+		return totalEmpWage;
+	}
+	public static void main(String[] args){
+		computeEmpWage();
 	}
 }
