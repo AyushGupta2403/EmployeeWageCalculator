@@ -3,18 +3,26 @@ public class EmployeeWage {
 	//Constants
 	public static final int IS_PART_TIME = 1;
 	public static final int IS_FULL_TIME = 2;
-	public static final int EMP_RATE_PER_HOUR = 20;
-	public static final int NUM_OF_WORKING_DAYS = 20;
-	public static final int MAX_HRS_IN_MONTH = 100;
 
-	public static void main(String[] args) {
+	private final String company;
+	private final int empRatePerHour;
+	private final int numOfWorkingDays;
+	private final int maxHoursPerMonth;
+
+	public EmployeeWage(String company, int empRatePerHour,
+												int numOfWorkingDays, int maxHoursPerMonth) {
+		this.company = company;
+		this.empRatePerHour = empRatePerHour;
+		this.numOfWorkingDays = numOfWorkingDays;
+		this.maxHoursPerMonth = maxHoursPerMonth;
+	}
+	public static void main(String[] args){
+		EmployeeWage dMart = new EmployeeWage("DMart", 20, 2, 10);
 		//Variables
-		int totalEmpHrs = 0, totalEmpWage = 0, totalWorkingDays = 0;
+		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
 		//Computation
-<<<<<<< HEAD
-		while ( totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS ){
+		while ( totalEmpHrs <= dMart.maxHoursPerMonth && totalWorkingDays < dMart.numOfWorkingDays ){
 			totalWorkingDays++;
-			int empHrs = 0;
 			int empCheck =(int) Math.floor(Math.random() * 10) % 3;
 			switch (empCheck){
 				case IS_FULL_TIME:
@@ -27,19 +35,10 @@ public class EmployeeWage {
 					empHrs = 0;
 			}
 			totalEmpHrs += empHrs;
-      	int empWage = empHrs * EMP_RATE_PER_HOUR;
-      	totalEmpWage += empWage;
-      	System.out.println("Employee Wage : " +empWage);
+      	System.out.println("Day : " + totalWorkingDays + " Emp Hrs" +empHrs);
 		}
-		System.out.println("Total Employee Wage: " + totalEmpWage);
-=======
-		double empCheck = Math.floor(Math.random() * 10) % 2;
-		if (empCheck == IS_FULL_TIME)
-			empHrs = 8;
-		else
-			empHrs = 0;
-		empWage = empHrs * EMP_RATE_PER_HOUR;
-		System.out.println("Employee Wage : " +empWage);
->>>>>>> UC2_Calculate_Wage
+		int totalEmpWage = totalEmpHrs * dMart.empRatePerHour;
+		System.out.println("Total Employee Wage for Company: "+dMart.company+" is : " +
+									totalEmpWage);
 	}
 }
