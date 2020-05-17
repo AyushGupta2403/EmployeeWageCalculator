@@ -1,19 +1,42 @@
-public class EmployeeWage {
+import java.util.LinkedList;
+
+interface IEmployeeWage{
+    void addCompanyEmpWage(String company, int empRatePerHr, int numOfWorkingDays, int maxHoursPerMonth);
+    void totalEmpWage();
+}
+
+public class EmployeeWage implements IEmployeeWage{
     public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
 
-    public static final int EMP_RATE_PER_HR = 20;
-    public static final int NUM_OF_WORKING_DAYS = 20;
-    public static final int MAX_HRS_IN_MONTH = 100;
+    private int numOfCompanies = 0;
+    private LinkedList<CompanyObj> listOfComp;
 
-    static void totalEmpWage(int ratePerHr, int numOfDays, int hrsInMonth) {
+    public EmployeeWage(){
+        listOfComp = new LinkedList<>();
+    }
+
+    public void addCompanyEmpWage(String company, int empRatePerHr, int numOfWorkingDays, int maxHoursPerMonth){
+        CompanyObj newWage = new CompanyObj(company, empRatePerHr, numOfWorkingDays, maxHoursPerMonth);
+        listOfComp.add(newWage);
+    }
+
+    public void totalEmpWage(){
+        for(int i = 0; i < listOfComp.size(); i++){
+            CompanyObj tempComp = listOfComp.get(i);
+            tempComp.setTotalEmpWage(this.totalEmpWage(tempComp));
+            System.out.println(tempComp);
+        }
+    }
+
+    public int totalEmpWage(CompanyObj companyObj) {
         //VARIABLES
         int empHrs = 0;
         int totalEmpHrs = 0;
         int totalWorkingDays = 0;
 
         //COMPUTATION
-        while (totalEmpHrs <= hrsInMonth && totalWorkingDays < numOfDays) {
+        while (totalEmpHrs <= companyObj.maxHoursPerMonth && totalWorkingDays < companyObj.numOfWorkingDays) {
             totalWorkingDays++;
             int empCheck = (int) Math.floor(Math.random() * 10) % 3;
             switch (empCheck) {
@@ -30,12 +53,14 @@ public class EmployeeWage {
             totalEmpHrs += empHrs;
             System.out.println("Days: " + totalWorkingDays + " Emp Hours: " + empHrs);
         }
-        int totalWage = totalEmpHrs * ratePerHr;
-        System.out.println("Total Emp Wage for company company is " + totalWage);
+        return totalEmpHrs * companyObj.empRatePerHr;
+        //System.out.println("Total Emp Wage for company company is " + totalEmpWage);
     }
 
-    public static void main(String args[]) {
-        totalEmpWage(20,20,100);
-        totalEmpWage(15, 25, 120);
+    public static void main(String[] args){
+        EmployeeWage arrObject = new EmployeeWage();
+        arrObject.addCompanyEmpWage("DMart", 20, 2, 10);
+        arrObject.addCompanyEmpWage("Reliance", 50, 5, 15);
+        arrObject.totalEmpWage();
     }
 }
